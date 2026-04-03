@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  *
- * @property Appliication[] $appliications
+ * @property Application[] $applications
  */
 class Level extends \yii\db\ActiveRecord
 {
@@ -51,9 +51,17 @@ class Level extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAppliications()
+    public function getApplications()
     {
-        return $this->hasMany(Appliication::class, ['level_id' => 'id']);
+        return $this->hasMany(Application::class, ['level_id' => 'id']);
+    }
+
+    public static function getLevel()
+    {
+        return static::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
     }
 
 }

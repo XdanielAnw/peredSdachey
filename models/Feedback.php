@@ -10,7 +10,7 @@ use Yii;
  * @property int $application_id
  * @property string $message
  *
- * @property Appliication $application
+ * @property Application $application
  */
 class Feedback extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class Feedback extends \yii\db\ActiveRecord
         return [
             [['message'], 'required'],
             [['message'], 'string'],
-            [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => Appliication::class, 'targetAttribute' => ['application_id' => 'id']],
+            [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => Application::class, 'targetAttribute' => ['application_id' => 'id']],
         ];
     }
 
@@ -54,7 +54,15 @@ class Feedback extends \yii\db\ActiveRecord
      */
     public function getApplication()
     {
-        return $this->hasOne(Appliication::class, ['id' => 'application_id']);
+        return $this->hasOne(Application::class, ['id' => 'application_id']);
+    }
+
+    public static function getFeedback()
+    {
+        return static::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
     }
 
 }

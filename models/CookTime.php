@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $hours
  *
- * @property Appliication[] $appliications
+ * @property Application[] $applications
  */
 class CookTime extends \yii\db\ActiveRecord
 {
@@ -53,7 +53,15 @@ class CookTime extends \yii\db\ActiveRecord
      */
     public function getAppliications()
     {
-        return $this->hasMany(Appliication::class, ['cook_time_id' => 'id']);
+        return $this->hasMany(Application::class, ['cook_time_id' => 'id']);
+    }
+
+    public static function getCookTime()
+    {
+        return static::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
     }
 
 }

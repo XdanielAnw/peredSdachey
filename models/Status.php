@@ -11,7 +11,7 @@ use Yii;
  * @property string $title
  * @property string $alias
  *
- * @property Appliication[] $appliications
+ * @property Application[] $applications
  */
 class Status extends \yii\db\ActiveRecord
 {
@@ -55,7 +55,20 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getAppliications()
     {
-        return $this->hasMany(Appliication::class, ['status_id' => 'id']);
+        return $this->hasMany(Application::class, ['status_id' => 'id']);
+    }
+
+    public static function getStatuses()
+    {
+        return static::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
+    }
+
+    public static function getAliasStatusesId($alias)
+    {
+        return static::findOne(['alias' => $alias])->id;
     }
 
 }

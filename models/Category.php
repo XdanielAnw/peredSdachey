@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  *
- * @property Application[] $appliications
+ * @property Application[] $applications
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -54,5 +54,13 @@ class Category extends \yii\db\ActiveRecord
     public function getAppliications()
     {
         return $this->hasMany(Application::class, ['category_id' => 'id']);
+    }
+
+    public static function getCategory()
+    {
+        return static::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
     }
 }
