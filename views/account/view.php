@@ -1,41 +1,40 @@
 <?php
 
-use yii\helpers\Html;
+use app\models\Category;
+use app\models\Level;
+use yii\bootstrap5\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var app\models\Application $model */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Applications', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+$this->title = 'Заявка #' . $model->id . ' от ' . Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y, h:i:s')
 ?>
 <div class="application-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Назад', ['/account', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
-            'created_at',
+            [
+                'attribute' => 'user_id',
+                'value' => $model->user->full_name,
+            ],
             'title',
             'description:ntext',
-            'category_id',
-            'level_id',
+            // [
+            //     'attribute' => 'category_id',
+            //     'value' => Category::getCategory()
+            // ],
+            // [
+            //     'attribute' =>  'level_id',
+            //     'value' => Level::getLevel()
+            // ],
             'cook_time_id:datetime',
             'date_end',
             'contact',
