@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Appliication".
+ * This is the model class for table "Application".
  *
  * @property int $id
  * @property int $user_id
@@ -22,12 +22,11 @@ use Yii;
  *
  * @property Category $category
  * @property CookTime $cookTime
- * @property Feedback $feedback
  * @property Level $level
  * @property Status $status
  * @property User $user
  */
-class Appliication extends \yii\db\ActiveRecord
+class Application extends \yii\db\ActiveRecord
 {
 
 
@@ -36,7 +35,7 @@ class Appliication extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Appliication';
+        return 'Application';
     }
 
     /**
@@ -66,16 +65,19 @@ class Appliication extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
+            'user_id' => 'Пользователь',
             'created_at' => 'Created At',
-            'title' => 'Title',
-            'description' => 'Description',
-            'category_id' => 'Category ID',
-            'level_id' => 'Level ID',
-            'cook_time_id' => 'Cook Time ID',
-            'date_end' => 'Date End',
-            'contact' => 'Contact',
-            'photo' => 'Photo',
+            'title' => 'Название',
+            'description' => 'Описание (состав ингредиентов и технологию приготовления)',
+            'category_id' => 'Категория рецепта (выбор из существующих категорий - "Завтраки",
+                "Обеды", "Ужины")',
+            'level_id' => ' Сложность рецепта (из списка: простой, средний, сложный, очень
+                сложный)',
+            'cook_time_id' => 'Примерное время на приготовления блюда (время должно быть в
+                промежутке от 2 до 8 часов)',
+            'date_end' => 'Дата, когда закончится время публикации рецепта для других',
+            'contact' => 'Контактная информация',
+            'photo' => 'Фото',
             'status_id' => 'Status ID',
         ];
     }
@@ -98,16 +100,6 @@ class Appliication extends \yii\db\ActiveRecord
     public function getCookTime()
     {
         return $this->hasOne(CookTime::class, ['id' => 'cook_time_id']);
-    }
-
-    /**
-     * Gets query for [[Feedback]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFeedback()
-    {
-        return $this->hasOne(Feedback::class, ['application_id' => 'id']);
     }
 
     /**
