@@ -13,7 +13,7 @@ use yii\bootstrap5\ActiveForm;
         <h3>Регистрация</h3>
 
         <?= $form->field($model, 'login') ?>
-        <?= $form->field($model, 'password') ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'full_name') ?>
         <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, [
             'mask' => '+7(999)-999-99-99',

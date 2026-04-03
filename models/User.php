@@ -133,4 +133,9 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password) ?? false;
     }
 
+    public function getIsAdmin()
+    {
+        return $this->role === 1;
+    }
+
 }
