@@ -27,19 +27,25 @@ $this->title = 'Заявка #' . $model->id . ' от ' . Yii::$app->formatter->
             ],
             'title',
             'description:ntext',
-            // [
-            //     'attribute' => 'category_id',
-            //     'value' => Category::getCategory()
-            // ],
-            // [
-            //     'attribute' =>  'level_id',
-            //     'value' => Level::getLevel()
-            // ],
-            'cook_time_id:datetime',
+            [
+                'attribute' => 'category_id',
+                'value' => $model->category->title
+            ],
+            [
+                'attribute' =>  'level_id',
+                'value' => $model->level->title
+            ],
+            [
+                'attribute' =>  'cook_time_id',
+                'value' => $model->cookTime->hours
+            ],
             'date_end',
             'contact',
             'photo',
-            'status_id',
+            [
+                'attribute' =>  'status_id',
+                'value' => $model->status->title
+            ],
         ],
     ]) ?>
 
